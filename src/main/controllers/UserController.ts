@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { findAddressesByUserIdFactory } from '../factories/MakeAddressService';
 import {
   deleteUserFactory,
   findAllUsersFactory,
@@ -23,7 +24,9 @@ export const getUserById = async (req: Request, res: Response) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    const { email, name, addresses } = user;
+    const { email, name } = user;
+    const addresses = await findAddressesByUserIdFactory.execute(id);
+
     return res.status(200).json({ email, name, addresses });
   } catch (error) {
     return res.status(500).json({ message: 'Internal Server Error' });

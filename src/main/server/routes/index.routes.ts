@@ -1,4 +1,5 @@
 import { Request, Response, Router } from 'express';
+import { AddressRouter } from './address.routes';
 import { AuthRouter } from './auth.routes';
 import { UserRouter } from './user.routes';
 
@@ -10,3 +11,4 @@ MainRouter.get('/', async (req: Request, res: Response) => {
 
 MainRouter.use('/auth', AuthRouter);
 MainRouter.use('/user', UserRouter);
+MainRouter.use('/address', AddressRouter);

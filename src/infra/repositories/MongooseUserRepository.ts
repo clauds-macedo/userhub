@@ -35,7 +35,9 @@ export class MongooseUserRepository implements IUserRepository {
   }
 
   async findById(id: string): Promise<User | null> {
-    const userDocument = await MongooseUser.findById(id).exec();
+    const userDocument = await MongooseUser.findById(id)
+      .populate('addresses')
+      .exec();
     if (!userDocument) {
       return null;
     }
@@ -47,7 +49,9 @@ export class MongooseUserRepository implements IUserRepository {
   }
 
   async findAll(): Promise<User[]> {
-    const userDocuments = await MongooseUser.find().exec();
+    const userDocuments = await MongooseUser.find()
+      .populate('addresses')
+      .exec();
     return userDocuments.map((userDocument) => {
       const { _id, ...rest } = userDocument.toObject();
       return UserMapper.toDomain({
