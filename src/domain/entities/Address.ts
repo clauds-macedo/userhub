@@ -1,13 +1,13 @@
 export interface IAddress {
-  id: number;
-  userId: number;
+  id: string;
+  userId: string;
   street: string;
   city: string;
 }
 
 export class Address implements IAddress {
-  id: number;
-  userId: number;
+  id: string;
+  userId: string;
   street: string;
   city: string;
 

@@ -1,9 +1,10 @@
 import { IAddress } from '@/domain/entities/Address';
+import { randomUUID } from 'crypto';
 
 export const generateFakeAddress = (): IAddress => {
   return {
-    id: Math.floor(Math.random() * 1000),
-    userId: 1,
+    id: randomUUID(),
+    userId: randomUUID(),
     street: `Fake Street ${Math.floor(Math.random() * 100)}`,
     city: 'Faketown',
   };

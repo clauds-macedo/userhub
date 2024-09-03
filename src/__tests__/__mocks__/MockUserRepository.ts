@@ -1,23 +1,23 @@
 import { ICreateUserDTO } from '@/domain/dtos/IUserDTO';
 import { IUser, User } from '@/domain/entities/User';
 import { IUserRepository } from '@/domain/repositories/IUserRepository';
+import { randomUUID } from 'crypto';
 
 export class MockUserRepository implements IUserRepository {
   private users: User[] = [];
-  private nextId = 1;
 
   async create(userDTO: ICreateUserDTO): Promise<User> {
     const user = new User({
       ...userDTO,
       createdAt: new Date(),
-      id: this.nextId++,
+      id: randomUUID(),
       addresses: [],
     });
     this.users.push(user);
     return user;
   }
 
-  async findById(id: number): Promise<User | null> {
+  async findById(id: string): Promise<User | null> {
     return this.users.find((user) => user.id === id) || null;
   }
 
@@ -25,7 +25,7 @@ export class MockUserRepository implements IUserRepository {
     return this.users;
   }
 
-  async update(id: number, userDTO: Partial<IUser>): Promise<User | null> {
+  async update(id: string, userDTO: Partial<IUser>): Promise<User | null> {
     const user = await this.findById(id);
     if (!user) {
       return null;
@@ -37,7 +37,7 @@ export class MockUserRepository implements IUserRepository {
     return user;
   }
 
-  async remove(id: number): Promise<boolean> {
+  async remove(id: string): Promise<boolean> {
     const index = this.users.findIndex((user) => user.id === id);
     if (index === -1) return false;
     this.users.splice(index, 1);
