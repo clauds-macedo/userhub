@@ -1,7 +1,7 @@
 import { IAddress } from '../entities/Address';
 import { IAddressRepository } from '../repositories/IAddressRepository';
 
-export class GetAddressesUseCase {
+export class FindAddressesByUserIdUseCase {
   constructor(private addressRepository: IAddressRepository) {}
 
   async execute(
@@ -9,9 +9,5 @@ export class GetAddressesUseCase {
     filters: Partial<IAddress> = {}
   ): Promise<IAddress[]> {
     return this.addressRepository.findByUserId(userId, filters);
-  }
-
-  async executeById(id: string): Promise<IAddress | null> {
-    return this.addressRepository.findById(id);
   }
 }
