@@ -21,7 +21,7 @@ export class User implements IUser {
     Object.assign(this, params);
   }
 
-  addAddress(address: IAddress): void {
-    this.addresses?.push(address);
+  validatePassword(password: string): boolean {
+    return password.length > 8;
   }
 }

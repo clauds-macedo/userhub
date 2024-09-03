@@ -25,7 +25,11 @@ export const create = async (req: Request, res: Response) => {
       password: hashedPassword,
     });
 
-    console.log(user);
+    if (!user.validatePassword(password)) {
+      return res
+        .status(400)
+        .json({ message: 'Password should have more than 8 characters' });
+    }
 
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, {
       expiresIn: '1h',

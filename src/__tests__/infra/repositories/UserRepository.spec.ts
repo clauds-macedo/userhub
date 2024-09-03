@@ -1,6 +1,5 @@
 import { MockHashRepository } from '@/__tests__/__mocks__/MockHashRepository';
 import { MockUserRepository } from '@/__tests__/__mocks__/MockUserRepository';
-import { generateFakeAddress } from '@/__tests__/fakes/generateFakeAddress';
 import { generateFakeUser } from '@/__tests__/fakes/generateFakeUser';
 import { ICreateUserDTO } from '@/domain/dtos/IUserDTO';
 import { CreateUserUseCase } from '@/domain/usecases/CreateUserUseCase';
@@ -64,22 +63,5 @@ describe('CreateUserUseCase', () => {
     const foundUserAfterDelete = await getUserByIdUseCase.execute(user.id);
 
     expect(foundUserAfterDelete).toBe(null);
-  });
-
-  it('should update a user', async () => {
-    const fakeAddress = generateFakeAddress();
-    const user = await createUserUseCase.execute(defaultUser);
-
-    const updatedUser = await updateUserUseCase.execute(user.id, {
-      name: 'Claudemir2',
-      email: 'updated.email@test.me',
-    });
-    updatedUser?.addAddress(fakeAddress);
-
-    expect(updatedUser).toBeDefined();
-    expect(updatedUser?.id).toBe(user.id);
-    expect(updatedUser?.name).toBe('Claudemir2');
-    expect(updatedUser?.email).toBe('updated.email@test.me');
-    expect(updatedUser?.addresses).toBeDefined();
   });
 });

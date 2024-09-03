@@ -14,4 +14,8 @@ export class Address implements IAddress {
   constructor(params: IAddress) {
     Object.assign(this, params);
   }
+
+  belongsToUser(userId: string): boolean {
+    return this.userId === userId;
+  }
 }
