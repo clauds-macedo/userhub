@@ -1,5 +1,8 @@
 import { Request, Response } from 'express';
-import { findAddressesByUserIdFactory } from '../factories/MakeAddressService';
+import {
+  deleteAddressFactory,
+  findAddressesByUserIdFactory,
+} from '../factories/MakeAddressService';
 import {
   deleteUserFactory,
   findAllUsersFactory,
@@ -7,10 +10,27 @@ import {
   updateUserFactory,
 } from '../factories/MakeUserService';
 
+const getUserAndAddresses = async (id: string) => {
+  const user = await getUserByIdFactory.execute(id);
+  if (!user) {
+    return null;
+  }
+  const addresses = await findAddressesByUserIdFactory.execute(id);
+  return { user, addresses };
+};
+
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
     const users = await findAllUsersFactory.execute();
-    return res.status(200).json(users);
+
+    const usersWithAddresses = await Promise.all(
+      users.map(async (user) => {
+        const addresses = await findAddressesByUserIdFactory.execute(user.id);
+        return { ...user, addresses };
+      })
+    );
+
+    return res.status(200).json(usersWithAddresses);
   } catch (error) {
     return res.status(500).json({ message: 'Internal Server Error' });
   }
@@ -20,12 +40,13 @@ export const getUserById = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    const user = await getUserByIdFactory.execute(id);
-    if (!user) {
+    const result = await getUserAndAddresses(id);
+    if (!result) {
       return res.status(404).json({ message: 'User not found' });
     }
+
+    const { user, addresses } = result;
     const { email, name } = user;
-    const addresses = await findAddressesByUserIdFactory.execute(id);
 
     return res.status(200).json({ email, name, addresses });
   } catch (error) {
@@ -57,12 +78,14 @@ export const deleteUser = async (req: Request, res: Response) => {
 
   try {
     const success = await deleteUserFactory.execute(id);
-
     if (!success) {
       return res.status(404).json({ message: 'User not found' });
     }
+    await deleteAddressFactory.execute(id);
 
-    return res.status(200).json({ message: 'User deleted successfully' });
+    return res
+      .status(200)
+      .json({ message: 'User and associated addresses deleted successfully' });
   } catch (error) {
     return res.status(500).json({ message: 'Internal Server Error' });
   }
