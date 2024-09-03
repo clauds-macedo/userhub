@@ -11,6 +11,7 @@ import {
 
 export const create = async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
+  console.log(req.body, 'req body');
   try {
     const userFound = await findByEmailFactory.execute(email);
     if (userFound) {
@@ -23,6 +24,8 @@ export const create = async (req: Request, res: Response) => {
       email,
       password: hashedPassword,
     });
+
+    console.log(user);
 
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, {
       expiresIn: '1h',
