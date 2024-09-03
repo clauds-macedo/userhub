@@ -1,5 +1,6 @@
 import { authMiddleware } from '@/infra/middlewares/auth';
 import {
+  deleteUser,
   getAllUsers,
   getUserById,
   updateUser,
@@ -11,3 +12,4 @@ export const UserRouter = Router();
 UserRouter.get('/', authMiddleware, getAllUsers);
 UserRouter.get('/:id', authMiddleware, getUserById);
 UserRouter.post('/:id', authMiddleware, updateUser);
+UserRouter.delete('/:id', authMiddleware, deleteUser);
