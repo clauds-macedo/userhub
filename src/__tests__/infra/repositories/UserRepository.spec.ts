@@ -1,3 +1,4 @@
+import { MockHashRepository } from '@/__tests__/__mocks__/MockHashRepository';
 import { MockUserRepository } from '@/__tests__/__mocks__/MockUserRepository';
 import { generateFakeAddress } from '@/__tests__/fakes/generateFakeAddress';
 import { generateFakeUser } from '@/__tests__/fakes/generateFakeUser';
@@ -15,6 +16,7 @@ const defaultUser: ICreateUserDTO = {
 };
 
 const userRepository = new MockUserRepository();
+const hashRepository = new MockHashRepository();
 
 describe('CreateUserUseCase', () => {
   let createUserUseCase: CreateUserUseCase;
@@ -27,7 +29,7 @@ describe('CreateUserUseCase', () => {
     findAllUsersUseCase = new FindAllUsersUseCase(userRepository);
     deleteUserUseCase = new DeleteUserUseCase(userRepository);
     getUserByIdUseCase = new GetUserByIdUseCase(userRepository);
-    updateUserUseCase = new UpdateUserUseCase(userRepository);
+    updateUserUseCase = new UpdateUserUseCase(userRepository, hashRepository);
   });
   it('should create a new user', async () => {
     const user = await createUserUseCase.execute(defaultUser);

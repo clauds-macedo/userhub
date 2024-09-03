@@ -6,6 +6,7 @@ import { FindUserByEmailUseCase } from '@/domain/usecases/FindUserByEmailUseCase
 import { GetUserByIdUseCase } from '@/domain/usecases/GetUserUseCase';
 import { UpdateUserUseCase } from '@/domain/usecases/UpdateUserUseCase';
 import { MongooseUserRepository } from '@/infra/repositories/MongooseUserRepository';
+import { hashRepository } from './MakeHashService';
 
 const userRepository: IUserRepository = new MongooseUserRepository();
 
@@ -13,5 +14,8 @@ export const createUserFactory = new CreateUserUseCase(userRepository);
 export const getUserByIdFactory = new GetUserByIdUseCase(userRepository);
 export const findAllUsersFactory = new FindAllUsersUseCase(userRepository);
 export const deleteUserFactory = new DeleteUserUseCase(userRepository);
-export const updateUserFactory = new UpdateUserUseCase(userRepository);
+export const updateUserFactory = new UpdateUserUseCase(
+  userRepository,
+  hashRepository
+);
 export const findByEmailFactory = new FindUserByEmailUseCase(userRepository);
