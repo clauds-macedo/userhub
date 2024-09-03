@@ -2,7 +2,9 @@ import { IAddress } from '@/domain/entities/Address';
 import { InferSchemaType } from 'mongoose';
 import { MongooseAddress } from '../models/MongooseAddress';
 
-type TMongooseUserDocument = InferSchemaType<typeof MongooseAddress.schema>;
+export type TMongooseUserDocument = InferSchemaType<
+  typeof MongooseAddress.schema
+>;
 
 export class AddressMapper {
   static toDomain(
