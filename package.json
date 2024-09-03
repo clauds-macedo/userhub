@@ -11,13 +11,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/express": "types/express",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "express": "^4.18.2"
   },
   "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0",
+    "@types/express": "types/express",
     "@eslint/js": "^9.9.1",
+    "@types/jest": "^29.5.12",
     "@types/node": "^22.5.2",
+    "@types/supertest": "^6.0.2",
     "eslint": "^9.9.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^9.1.0",
@@ -26,6 +31,7 @@
     "eslint-plugin-prettier": "^5.2.1",
     "globals": "^15.9.0",
     "prettier": "^3.3.3",
+    "ts-jest": "^29.2.5",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.5.4",
     "typescript-eslint": "^8.4.0"
