@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 
-export const AddressSchema: Schema = new Schema({
+export const AddressSchema = new Schema({
   userId: {
     type: Schema.Types.ObjectId,
     ref: 'User',

@@ -1,12 +1,16 @@
 import { IAddress } from '@/domain/entities/Address';
+import { InferSchemaType } from 'mongoose';
+import { MongooseAddress } from '../models/MongooseAddress';
+
+type TMongooseUserDocument = InferSchemaType<typeof MongooseAddress.schema>;
 
 export class AddressMapper {
   static toDomain(
-    addressDocument: MongooseUserDocument & { id: string }
+    addressDocument: TMongooseUserDocument & { id: string }
   ): IAddress {
     return {
-      id: addressDocument._id.toString(),
-      userId: addressDocument.userId,
+      id: addressDocument.id.toString(),
+      userId: addressDocument.userId.toString(),
       street: addressDocument.street,
       city: addressDocument.city,
     };
