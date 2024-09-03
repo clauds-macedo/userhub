@@ -5,9 +5,10 @@ import { MainRouter } from './routes/index.routes';
 
 dotenv.config();
 
-const app: express.Server = express();
+const app = express();
 const PORT = process.env.PORT || 3333;
 
+app.use(express.json());
 app.use('/', MainRouter);
 
 app.listen(PORT, async () => {

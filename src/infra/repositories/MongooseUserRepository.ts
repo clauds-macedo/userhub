@@ -56,4 +56,16 @@ export class MongooseUserRepository implements IUserRepository {
       });
     });
   }
+
+  async findByEmail(email: string): Promise<User | null> {
+    const userDocument = await MongooseUser.findOne({ email }).exec();
+    if (!userDocument) {
+      return null;
+    }
+    const { _id, ...rest } = userDocument.toObject();
+    return UserMapper.toDomain({
+      id: _id.toString(),
+      ...rest,
+    });
+  }
 }
