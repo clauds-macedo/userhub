@@ -4,11 +4,11 @@ import { User as DomainUser, IUser } from '@/domain/entities/User';
 import { InferSchemaType } from 'mongoose';
 import { MongooseUser } from '../models/MongooseUser';
 
-type MongooseUserDocument = InferSchemaType<typeof MongooseUser.schema>;
+type TMongooseUserDocument = InferSchemaType<typeof MongooseUser.schema>;
 
 export class UserMapper {
   static toDomain(
-    userDocument: MongooseUserDocument & { id: string }
+    userDocument: TMongooseUserDocument & { id: string }
   ): DomainUser {
     const addresses: IAddress[] = userDocument.addresses?.map((address) => ({
       street: address.street || '',
@@ -25,13 +25,13 @@ export class UserMapper {
     return new DomainUser(user);
   }
 
-  static toPersistence(domainUser: ICreateUserDTO): MongooseUserDocument {
+  static toPersistence(domainUser: ICreateUserDTO): TMongooseUserDocument {
     return {
       name: domainUser.name,
       email: domainUser.email,
       password: domainUser.password,
       createdAt: new Date(),
       addresses: [],
-    } as unknown as MongooseUserDocument;
+    } as unknown as TMongooseUserDocument;
   }
 }

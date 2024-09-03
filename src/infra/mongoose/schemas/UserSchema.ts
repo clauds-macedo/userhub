@@ -9,9 +9,6 @@ export const UserSchema = new Schema({
     {
       street: String,
       city: String,
-      state: String,
-      zipCode: String,
-      country: String,
     },
   ],
 });
