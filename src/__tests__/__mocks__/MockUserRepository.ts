@@ -2,7 +2,7 @@ import { ICreateUserDTO } from '@/domain/dtos/IUserDTO';
 import { IUser, User } from '@/domain/entities/User';
 import { IUserRepository } from '@/domain/repositories/IUserRepository';
 
-export class InMemoryUserRepository implements IUserRepository {
+export class MockUserRepository implements IUserRepository {
   private users: User[] = [];
   private nextId = 1;
 
