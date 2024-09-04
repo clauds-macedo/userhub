@@ -1,3 +1,4 @@
+import { EHttpStatusCode } from '@/domain/enums/EHttpStatusCode';
 import { Request, Response } from 'express';
 import {
   deleteAddressFactory,
@@ -30,9 +31,11 @@ export const getAllUsers = async (req: Request, res: Response) => {
       })
     );
 
-    return res.status(200).json(usersWithAddresses);
+    return res.status(EHttpStatusCode.SUCCESS).json(usersWithAddresses);
   } catch (error) {
-    return res.status(500).json({ message: 'Internal Server Error' });
+    return res
+      .status(EHttpStatusCode.INTERNAL_SERVER_ERROR)
+      .json({ message: 'Internal Server Error' });
   }
 };
 
@@ -42,15 +45,19 @@ export const getUserById = async (req: Request, res: Response) => {
   try {
     const result = await getUserAndAddresses(id);
     if (!result) {
-      return res.status(404).json({ message: 'User not found' });
+      return res
+        .status(EHttpStatusCode.NOT_FOUND)
+        .json({ message: 'User not found' });
     }
 
     const { user, addresses } = result;
     const { email, name } = user;
 
-    return res.status(200).json({ email, name, addresses });
+    return res.status(EHttpStatusCode.SUCCESS).json({ email, name, addresses });
   } catch (error) {
-    return res.status(500).json({ message: 'Internal Server Error' });
+    return res
+      .status(EHttpStatusCode.INTERNAL_SERVER_ERROR)
+      .json({ message: 'Internal Server Error' });
   }
 };
 
@@ -65,11 +72,15 @@ export const updateUser = async (req: Request, res: Response) => {
       password,
     });
     if (!updatedUser) {
-      return res.status(404).json({ message: 'User not found' });
+      return res
+        .status(EHttpStatusCode.NOT_FOUND)
+        .json({ message: 'User not found' });
     }
-    return res.status(200).json(updatedUser);
+    return res.status(EHttpStatusCode.SUCCESS).json(updatedUser);
   } catch (error) {
-    return res.status(500).json({ message: 'Internal Server Error' });
+    return res
+      .status(EHttpStatusCode.INTERNAL_SERVER_ERROR)
+      .json({ message: 'Internal Server Error' });
   }
 };
 
@@ -79,14 +90,18 @@ export const deleteUser = async (req: Request, res: Response) => {
   try {
     const success = await deleteUserFactory.execute(id);
     if (!success) {
-      return res.status(404).json({ message: 'User not found' });
+      return res
+        .status(EHttpStatusCode.NOT_FOUND)
+        .json({ message: 'User not found' });
     }
     await deleteAddressFactory.execute(id);
 
     return res
-      .status(200)
+      .status(EHttpStatusCode.SUCCESS)
       .json({ message: 'User and associated addresses deleted successfully' });
   } catch (error) {
-    return res.status(500).json({ message: 'Internal Server Error' });
+    return res
+      .status(EHttpStatusCode.INTERNAL_SERVER_ERROR)
+      .json({ message: 'Internal Server Error' });
   }
 };

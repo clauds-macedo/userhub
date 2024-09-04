@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1725410979019" clover="3.2.0">
+  <project timestamp="1725410979019" name="All files">
+    <metrics statements="31" coveredstatements="26" conditionals="1" coveredconditionals="0" methods="14" coveredmethods="12" elements="46" coveredelements="38" complexity="0" loc="31" ncloc="31" packages="3" files="8" classes="8"/>
+    <package name="__tests__.fakes">
+      <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="generateFakeAddress.ts" path="C:\Users\Claud\Desktop\userhub\src\__tests__\fakes\generateFakeAddress.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+      </file>
+      <file name="generateFakeUser.ts" path="C:\Users\Claud\Desktop\userhub\src\__tests__\fakes\generateFakeUser.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+      </file>
+    </package>
+    <package name="domain.entities">
+      <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+      <file name="User.ts" path="C:\Users\Claud\Desktop\userhub\src\domain\entities\User.ts">
+        <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="21" count="10" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="domain.usecases">
+      <metrics statements="19" coveredstatements="15" conditionals="1" coveredconditionals="0" methods="10" coveredmethods="9"/>
+      <file name="CreateUserUseCase.ts" path="C:\Users\Claud\Desktop\userhub\src\domain\usecases\CreateUserUseCase.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="9" count="6" type="stmt"/>
+      </file>
+      <file name="DeleteUserUseCase.ts" path="C:\Users\Claud\Desktop\userhub\src\domain\usecases\DeleteUserUseCase.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+      </file>
+      <file name="FindAllUsersUseCase.ts" path="C:\Users\Claud\Desktop\userhub\src\domain\usecases\FindAllUsersUseCase.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+      </file>
+      <file name="GetUserUseCase.ts" path="C:\Users\Claud\Desktop\userhub\src\domain\usecases\GetUserUseCase.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+      </file>
+      <file name="UpdateUserUseCase.ts" path="C:\Users\Claud\Desktop\userhub\src\domain\usecases\UpdateUserUseCase.ts">
+        <metrics statements="7" coveredstatements="3" conditionals="1" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

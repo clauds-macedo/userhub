@@ -1,3 +1,4 @@
+import { EHttpStatusCode } from '@/domain/enums/EHttpStatusCode';
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import {
@@ -15,7 +16,9 @@ export const create = async (req: Request, res: Response) => {
   try {
     const userFound = await findByEmailFactory.execute(email);
     if (userFound) {
-      return res.status(400).json({ message: 'User already exists' });
+      return res
+        .status(EHttpStatusCode.BAD_REQUEST)
+        .json({ message: 'User already exists' });
     }
     const hashedPassword = await hashPasswordFactory.execute(password);
 
@@ -27,7 +30,7 @@ export const create = async (req: Request, res: Response) => {
 
     if (!user.validatePassword(password)) {
       return res
-        .status(400)
+        .status(EHttpStatusCode.BAD_REQUEST)
         .json({ message: 'Password should have more than 8 characters' });
     }
 
@@ -35,9 +38,11 @@ export const create = async (req: Request, res: Response) => {
       expiresIn: '1h',
     });
 
-    return res.status(201).json({ token, user });
+    return res.status(EHttpStatusCode.CREATED).json({ token, user });
   } catch (error) {
-    return res.status(500).json({ message: 'Internal Server Error' });
+    return res
+      .status(EHttpStatusCode.INTERNAL_SERVER_ERROR)
+      .json({ message: 'Internal Server Error' });
   }
 };
 
@@ -47,7 +52,9 @@ export const login = async (req: Request, res: Response) => {
   try {
     const user = await findByEmailFactory.execute(email);
     if (!user) {
-      return res.status(400).json({ message: 'Invalid credentials' });
+      return res
+        .status(EHttpStatusCode.BAD_REQUEST)
+        .json({ message: 'Invalid credentials' });
     }
 
     const isMatch = await comparePasswordFactory.execute(
@@ -55,15 +62,19 @@ export const login = async (req: Request, res: Response) => {
       user.password
     );
     if (!isMatch) {
-      return res.status(400).json({ message: 'Invalid credentials' });
+      return res
+        .status(EHttpStatusCode.BAD_REQUEST)
+        .json({ message: 'Invalid credentials' });
     }
 
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, {
       expiresIn: '1h',
     });
 
-    return res.status(200).json({ token, user });
+    return res.status(EHttpStatusCode.SUCCESS).json({ token, user });
   } catch (error) {
-    return res.status(500).json({ message: 'Internal Server Error' });
+    return res
+      .status(EHttpStatusCode.INTERNAL_SERVER_ERROR)
+      .json({ message: 'Internal Server Error' });
   }
 };
