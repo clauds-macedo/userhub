@@ -13,7 +13,7 @@ import {
 
 export const create = async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
-  console.log(req.body, 'req body');
+
   try {
     const userFound = await findByEmailFactory.execute(email);
     if (userFound) {
@@ -22,7 +22,7 @@ export const create = async (req: Request, res: Response) => {
         .json({ message: EErrorMessages.USER_ALREADY_EXISTS });
     }
     const hashedPassword = await hashPasswordFactory.execute(password);
-
+    console.log(password, hashedPassword);
     const user = await createUserFactory.execute({
       name,
       email,
@@ -57,7 +57,7 @@ export const login = async (req: Request, res: Response) => {
         .status(EHttpStatusCode.BAD_REQUEST)
         .json({ message: EErrorMessages.INVALID_CREDENTIALS });
     }
-
+    console.log(password, user.password);
     const isMatch = await comparePasswordFactory.execute(
       password,
       user.password

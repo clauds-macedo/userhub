@@ -8,26 +8,33 @@
     "test": "jest",
     "build": "tsc --noEmit false -p .",
     "lint": "eslint src/**/*.{ts}",
-    "dev": "ts-node-dev  -r tsconfig-paths/register --respawn --transpile-only src/main/server/app.ts"
+    "dev": "ts-node-dev  -r tsconfig-paths/register --respawn --transpile-only src/main/server/app.ts",
+    "swagger-autogen": "node ./src/main/docs/swagger.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "argon2": "^0.41.1",
     "bcrypt": "^5.1.1",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.6.0"
+    "mongoose": "^8.6.0",
+    "swagger-autogen": "^2.23.7",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.2",
-    "@types/jsonwebtoken": "^9.0.6",
     "@eslint/js": "^9.9.1",
+    "@types/bcrypt": "^5.0.2",
     "@types/express": "^4.17.21",
     "@types/jest": "^29.5.12",
+    "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^22.5.2",
     "@types/supertest": "^6.0.2",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.6",
     "eslint": "^9.9.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^9.1.0",
