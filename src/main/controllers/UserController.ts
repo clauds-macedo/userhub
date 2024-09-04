@@ -1,5 +1,6 @@
 import { EErrorMessages } from '@/domain/enums/EErrorMessages';
 import { EHttpStatusCode } from '@/domain/enums/EHttpStatusCode';
+import { ESuccessMessages } from '@/domain/enums/ESuccessMessages';
 import { Request, Response } from 'express';
 import {
   deleteAddressFactory,
@@ -99,7 +100,7 @@ export const deleteUser = async (req: Request, res: Response) => {
 
     return res
       .status(EHttpStatusCode.SUCCESS)
-      .json({ message: 'User and associated addresses deleted successfully' });
+      .json({ message: ESuccessMessages.OPERATION_SUCCESSFUL });
   } catch (error) {
     return res
       .status(EHttpStatusCode.INTERNAL_SERVER_ERROR)

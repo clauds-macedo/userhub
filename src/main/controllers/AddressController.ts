@@ -1,5 +1,6 @@
 import { EErrorMessages } from '@/domain/enums/EErrorMessages';
 import { EHttpStatusCode } from '@/domain/enums/EHttpStatusCode';
+import { ESuccessMessages } from '@/domain/enums/ESuccessMessages';
 import { Request, Response } from 'express';
 import {
   createAddressFactory,
@@ -69,7 +70,7 @@ export const deleteAddress = async (req: Request, res: Response) => {
     if (deletedAddress) {
       return res
         .status(EHttpStatusCode.SUCCESS)
-        .json({ message: 'Address deleted successfully' });
+        .json({ message: ESuccessMessages.ADDRESS_DELETED });
     } else {
       return res
         .status(EHttpStatusCode.NOT_FOUND)
