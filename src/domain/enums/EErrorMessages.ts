@@ -9,4 +9,5 @@ export enum EErrorMessages {
   FORBIDDEN = 'Forbidden',
   CONFLICT = 'Conflict',
   INVALID_CREDENTIALS = 'Invalid credentials',
+  PASSWORD_CHARACTERS_COUNT = 'Password should have more than 8 characters',
 }

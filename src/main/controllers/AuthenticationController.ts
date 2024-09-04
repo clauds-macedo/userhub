@@ -32,7 +32,7 @@ export const create = async (req: Request, res: Response) => {
     if (!user.validatePassword(password)) {
       return res
         .status(EHttpStatusCode.BAD_REQUEST)
-        .json({ message: 'Password should have more than 8 characters' });
+        .json({ message: EErrorMessages.PASSWORD_CHARACTERS_COUNT });
     }
 
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, {
