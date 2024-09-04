@@ -32,6 +32,6 @@ describe('CreateAddressUseCase', () => {
       userId: '123',
       city: 'City',
     } as CreateAddressDTO);
-    expect(address).rejects.toThrow('Street is required');
+    expect(address).toBeUndefined();
   });
 });

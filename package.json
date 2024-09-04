@@ -6,10 +6,10 @@
   "scripts": {
     "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/src/main/server/app.js",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "build": "tsc --noEmit false -p .",
     "lint": "eslint src/**/*.{ts}",
-    "dev": "ts-node-dev  -r tsconfig-paths/register --respawn --transpile-only src/main/server/app.ts",
-    "swagger-autogen": "node ./src/main/docs/swagger.ts"
+    "dev": "ts-node-dev  -r tsconfig-paths/register --respawn --transpile-only src/main/server/app.ts"
   },
   "author": "",
   "license": "ISC",

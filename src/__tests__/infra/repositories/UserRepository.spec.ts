@@ -64,4 +64,24 @@ describe('CreateUserUseCase', () => {
 
     expect(foundUserAfterDelete).toBe(null);
   });
+
+  it('should update an user', async () => {
+    const createdUser = await createUserUseCase.execute(defaultUser);
+    const updatedUser = await updateUserUseCase.execute(createdUser.id, {
+      name: 'John',
+    });
+
+    expect(updatedUser?.name).toBe('John');
+    expect(updatedUser?.name).not.toBe(defaultUser.name);
+  });
+
+  it('should update user with a new password (if block triggered)', async () => {
+    const user = await createUserUseCase.execute(defaultUser);
+
+    const updatedUser = await updateUserUseCase.execute(user.id, {
+      password: 'newpassword123',
+    });
+
+    expect(updatedUser?.password).not.toBe(defaultUser.password);
+  });
 });
