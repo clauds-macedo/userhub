@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1725467745825" clover="3.2.0">
-  <project timestamp="1725467745825" name="All files">
-    <metrics statements="57" coveredstatements="56" conditionals="11" coveredconditionals="8" methods="31" coveredmethods="30" elements="99" coveredelements="94" complexity="0" loc="57" ncloc="57" packages="4" files="15" classes="15"/>
+<coverage generated="1725476210560" clover="3.2.0">
+  <project timestamp="1725476210560" name="All files">
+    <metrics statements="63" coveredstatements="62" conditionals="11" coveredconditionals="8" methods="35" coveredmethods="34" elements="109" coveredelements="104" complexity="0" loc="63" ncloc="63" packages="4" files="17" classes="17"/>
     <package name="__tests__.fakes">
       <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
       <file name="generateFakeAddress.ts" path="C:\Users\Claud\Desktop\userhub\src\__tests__\fakes\generateFakeAddress.ts">
@@ -30,7 +30,13 @@
       </file>
     </package>
     <package name="domain.usecases">
-      <metrics statements="36" coveredstatements="36" conditionals="3" coveredconditionals="3" methods="22" coveredmethods="22"/>
+      <metrics statements="42" coveredstatements="42" conditionals="3" coveredconditionals="3" methods="26" coveredmethods="26"/>
+      <file name="ComparePasswordUseCase.ts" path="C:\Users\Claud\Desktop\userhub\src\domain\usecases\ComparePasswordUseCase.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+      </file>
       <file name="CreateAddressUseCase.ts" path="C:\Users\Claud\Desktop\userhub\src\domain\usecases\CreateAddressUseCase.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="4" count="1" type="stmt"/>
@@ -80,6 +86,12 @@
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
         <line num="8" count="2" type="stmt"/>
+      </file>
+      <file name="HashPasswordUseCase.ts" path="C:\Users\Claud\Desktop\userhub\src\domain\usecases\HashPasswordUseCase.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
       </file>
       <file name="UpdateAddressUseCase.ts" path="C:\Users\Claud\Desktop\userhub\src\domain\usecases\UpdateAddressUseCase.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>

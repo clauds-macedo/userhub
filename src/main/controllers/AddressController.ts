@@ -12,7 +12,7 @@ import {
 
 export const createAddress = async (req: Request, res: Response) => {
   const { street, city, userId } = req.body;
-
+  console.log(req.body);
   try {
     const address = await createAddressFactory.execute({
       userId,

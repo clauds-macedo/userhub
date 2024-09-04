@@ -7,17 +7,22 @@ export const authMiddleware = (
   res: Response,
   next: NextFunction
 ) => {
-  const token = req.headers.authorization;
-  if (!token) {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res
       .status(EHttpStatusCode.UNAUTHORIZED)
-      .json({ message: 'Access denied. No token provided.' });
+      .json({ message: 'Access denied. No token provided or invalid format.' });
   }
+
+  const token = authHeader.split(' ')[1];
 
   try {
     jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
     return next();
   } catch (err) {
-    res.status(EHttpStatusCode.BAD_REQUEST).json({ message: 'Invalid token.' });
+    return res
+      .status(EHttpStatusCode.BAD_REQUEST)
+      .json({ message: 'Invalid token.' });
   }
 };
