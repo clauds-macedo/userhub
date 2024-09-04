@@ -1,6 +1,11 @@
 import { MockAddressRepository } from '@/__tests__/__mocks__/MockAddressRepository';
 import { generateFakeAddress } from '@/__tests__/fakes/generateFakeAddress';
 import { IAddress } from '@/domain/entities/Address';
+import { CreateAddressUseCase } from '@/domain/usecases/CreateAddressUseCase';
+import { DeleteAddressUseCase } from '@/domain/usecases/DeleteAddressUseCase';
+import { FindAllAddressesUseCase } from '@/domain/usecases/FindAllAddressesUseCase';
+import { FindAddressesByUserIdUseCase } from '@/domain/usecases/GetAddressesUseCase';
+import { UpdateAddressUseCase } from '@/domain/usecases/UpdateAddressUseCase';
 
 const defaultAddress: Partial<IAddress> = {
   userId: '12345',
@@ -10,28 +15,33 @@ const defaultAddress: Partial<IAddress> = {
 
 describe('MockAddressRepository', () => {
   let addressRepository: MockAddressRepository;
+  let createAddressUseCase: CreateAddressUseCase;
+  let deleteAddressUseCase: DeleteAddressUseCase;
+  let findAllAddressesUseCase: FindAllAddressesUseCase;
+  let findAddressesByUserIdUseCase: FindAddressesByUserIdUseCase;
+  let updateAddressUseCase: UpdateAddressUseCase;
 
   beforeEach(() => {
     addressRepository = new MockAddressRepository();
-  });
-
-  it('should create a new address', async () => {
-    const address = await addressRepository.create(defaultAddress);
-
-    expect(address).toHaveProperty('id');
-    expect(address.userId).toBe(defaultAddress.userId);
-    expect(address.street).toBe(defaultAddress.street);
-    expect(address.city).toBe(defaultAddress.city);
+    createAddressUseCase = new CreateAddressUseCase(addressRepository);
+    deleteAddressUseCase = new DeleteAddressUseCase(addressRepository);
+    findAllAddressesUseCase = new FindAllAddressesUseCase(addressRepository);
+    findAddressesByUserIdUseCase = new FindAddressesByUserIdUseCase(
+      addressRepository
+    );
+    updateAddressUseCase = new UpdateAddressUseCase(addressRepository);
   });
 
   it('should find addresses by userId', async () => {
-    const address1 = await addressRepository.create(defaultAddress);
-    const address2 = await addressRepository.create({
+    const address1 = await createAddressUseCase.execute(
+      defaultAddress as IAddress
+    );
+    const address2 = await createAddressUseCase.execute({
       ...generateFakeAddress(),
       userId: '12345',
     });
 
-    const addresses = await addressRepository.findByUserId('12345');
+    const addresses = await findAddressesByUserIdUseCase.execute('12345');
 
     expect(addresses.length).toBe(2);
     expect(addresses[0].street).toBe(address1.street);
@@ -39,16 +49,18 @@ describe('MockAddressRepository', () => {
   });
 
   it('should return all addresses', async () => {
-    await addressRepository.create(defaultAddress);
-    await addressRepository.create(generateFakeAddress());
+    await createAddressUseCase.execute(defaultAddress as IAddress);
+    await createAddressUseCase.execute(generateFakeAddress() as IAddress);
 
-    const allAddresses = await addressRepository.findAll();
+    const allAddresses = await findAllAddressesUseCase.execute();
     expect(allAddresses.length).toBe(2);
   });
 
   it('should update an address', async () => {
-    const address = await addressRepository.create(defaultAddress);
-    const updatedAddress = await addressRepository.update(address.id, {
+    const address = await createAddressUseCase.execute(
+      defaultAddress as IAddress
+    );
+    const updatedAddress = await updateAddressUseCase.execute(address.id, {
       street: 'Updated Street',
     });
 
@@ -57,7 +69,7 @@ describe('MockAddressRepository', () => {
   });
 
   it('should return null when updating a non-existent address', async () => {
-    const result = await addressRepository.update('non-existent-id', {
+    const result = await updateAddressUseCase.execute('non-existent-id', {
       street: 'Non-existent Street',
     });
 
@@ -65,17 +77,19 @@ describe('MockAddressRepository', () => {
   });
 
   it('should delete an address', async () => {
-    const address = await addressRepository.create(defaultAddress);
-    const isDeleted = await addressRepository.delete(address.id);
+    const address = await createAddressUseCase.execute(
+      defaultAddress as IAddress
+    );
+    const isDeleted = await deleteAddressUseCase.execute(address.id);
 
     expect(isDeleted).toBe(true);
 
-    const addresses = await addressRepository.findAll();
+    const addresses = await findAllAddressesUseCase.execute();
     expect(addresses.length).toBe(0);
   });
 
   it('should return false when deleting a non-existent address', async () => {
-    const isDeleted = await addressRepository.delete('non-existent-id');
+    const isDeleted = await deleteAddressUseCase.execute('non-existent-id');
     expect(isDeleted).toBe(false);
   });
 });
