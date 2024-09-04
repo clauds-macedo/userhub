@@ -12,6 +12,45 @@ Este projeto é uma API para gerenciar usuários e endereços. Ele segue os prin
 - Cobertura de testes com Jest, incluindo mocks e fakes.
 - Implementação de padrões de projeto como **Factory** e **Mapper**.
 
+## 🚀 Como Rodar a API
+### Pré-requisitos
+Antes de começar, você precisará ter as seguintes ferramentas instaladas:
+- Node.js (versão 14 ou superior)
+= Yarn ou npm
+- MongoDB (para rodar o banco de dados localmente)
+### Passo a passo
+```bash
+# Clone este repositório
+$ git clone https://github.com/clauds-macedo/userhub.git
+
+# Acesse a pasta do projeto
+$ cd userhub
+
+# Instale as dependências
+$ yarn
+# ou
+$ npm install
+
+# Copie o arquivo de exemplo de variáveis de ambiente
+$ cp .env.example .env
+
+# Inicie o MongoDB (ou abra o Mongo Compass e inicie conexão)
+$ mongod
+
+# Execute a aplicação
+$ yarn dev
+# ou
+$ npm run dev
+
+# A aplicação será iniciada na porta definida no .env (padrão: 3333)
+# Acesse http://localhost:3333
+
+# Para rodar os testes (opcional)
+$ yarn test
+# ou
+$ npm run test
+```
+
 ## Padrões de Projeto Utilizados
 
 ### Factory
@@ -23,12 +62,12 @@ O **Mapper** é utilizado para transformar entidades para o Schema de um banco d
 
 ## Tecnologias Utilizadas
 
-- **TypeScript**: JavaScript com tipagem estática para código mais confiável e manutenível.
-- **Jest**: Framework de testes para testes unitários e de integração.
-- **ESLint**: Ferramenta de linting para garantir a qualidade do código.
-- **Arquitetura Limpa**: Separação de responsabilidades entre lógica de negócio, entidades e acesso a dados.
-- **Factory Pattern**: Padrão de fábrica para abstrair a criação de objetos.
-- **Mapper Pattern**: Padrão para transformar objetos de um tipo para outro.
+- ⚙️ TypeScript
+- 🧪 Jest
+- 🧹 ESLint
+- 🏛️ Arquitetura Limpa
+- 🏭 Factory Pattern
+- 🔄 Mapper Pattern
 
 ## Estrutura do Projeto
 
@@ -69,6 +108,8 @@ O **Mapper** é utilizado para transformar entidades para o Schema de um banco d
 │   │   └── app.ts                 # Configuração principal da aplicação (express, middlewares, etc.)
 │   └── __tests__/                 # Testes unitários e mocks
 ├── .env                           # Variáveis de ambiente
-├── package.json                   # Dependências e scripts do projeto
-└── yarn.lock                      # Arquivo de bloqueio de dependências
 ```
+
+## Diagrama
+![userhub (1)](https://github.com/user-attachments/assets/37a56601-0a24-4f30-8488-39174252a30d)
+
