@@ -1,3 +1,4 @@
+import { EErrorMessages } from '@/domain/enums/EErrorMessages';
 import { EHttpStatusCode } from '@/domain/enums/EHttpStatusCode';
 import { Request, Response } from 'express';
 import {
@@ -35,7 +36,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
   } catch (error) {
     return res
       .status(EHttpStatusCode.INTERNAL_SERVER_ERROR)
-      .json({ message: 'Internal Server Error' });
+      .json({ message: EErrorMessages.INTERNAL_SERVER_ERROR });
   }
 };
 
@@ -47,7 +48,7 @@ export const getUserById = async (req: Request, res: Response) => {
     if (!result) {
       return res
         .status(EHttpStatusCode.NOT_FOUND)
-        .json({ message: 'User not found' });
+        .json({ message: EErrorMessages.USER_NOT_FOUND });
     }
 
     const { user, addresses } = result;
@@ -57,7 +58,7 @@ export const getUserById = async (req: Request, res: Response) => {
   } catch (error) {
     return res
       .status(EHttpStatusCode.INTERNAL_SERVER_ERROR)
-      .json({ message: 'Internal Server Error' });
+      .json({ message: EErrorMessages.INTERNAL_SERVER_ERROR });
   }
 };
 
@@ -74,13 +75,13 @@ export const updateUser = async (req: Request, res: Response) => {
     if (!updatedUser) {
       return res
         .status(EHttpStatusCode.NOT_FOUND)
-        .json({ message: 'User not found' });
+        .json({ message: EErrorMessages.USER_NOT_FOUND });
     }
     return res.status(EHttpStatusCode.SUCCESS).json(updatedUser);
   } catch (error) {
     return res
       .status(EHttpStatusCode.INTERNAL_SERVER_ERROR)
-      .json({ message: 'Internal Server Error' });
+      .json({ message: EErrorMessages.INTERNAL_SERVER_ERROR });
   }
 };
 
@@ -92,7 +93,7 @@ export const deleteUser = async (req: Request, res: Response) => {
     if (!success) {
       return res
         .status(EHttpStatusCode.NOT_FOUND)
-        .json({ message: 'User not found' });
+        .json({ message: EErrorMessages.USER_NOT_FOUND });
     }
     await deleteAddressFactory.execute(id);
 
@@ -102,6 +103,6 @@ export const deleteUser = async (req: Request, res: Response) => {
   } catch (error) {
     return res
       .status(EHttpStatusCode.INTERNAL_SERVER_ERROR)
-      .json({ message: 'Internal Server Error' });
+      .json({ message: EErrorMessages.INTERNAL_SERVER_ERROR });
   }
 };

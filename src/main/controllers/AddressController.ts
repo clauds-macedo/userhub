@@ -1,3 +1,4 @@
+import { EErrorMessages } from '@/domain/enums/EErrorMessages';
 import { EHttpStatusCode } from '@/domain/enums/EHttpStatusCode';
 import { Request, Response } from 'express';
 import {
@@ -22,7 +23,7 @@ export const createAddress = async (req: Request, res: Response) => {
   } catch (error) {
     return res
       .status(EHttpStatusCode.INTERNAL_SERVER_ERROR)
-      .json({ message: 'Internal Server Error' });
+      .json({ message: EErrorMessages.INTERNAL_SERVER_ERROR });
   }
 };
 
@@ -35,7 +36,7 @@ export const getAllAddresses = async (req: Request, res: Response) => {
   } catch (error) {
     return res
       .status(EHttpStatusCode.INTERNAL_SERVER_ERROR)
-      .json({ message: 'Internal Server Error' });
+      .json({ message: EErrorMessages.INTERNAL_SERVER_ERROR });
   }
 };
 
@@ -48,14 +49,14 @@ export const getAddressById = async (req: Request, res: Response) => {
     if (!address || address.length === 0) {
       return res
         .status(EHttpStatusCode.NOT_FOUND)
-        .json({ message: 'Address not found' });
+        .json({ message: EErrorMessages.ADDRESS_NOT_FOUND });
     }
 
     return res.status(EHttpStatusCode.SUCCESS).json(address);
   } catch (error) {
     return res
       .status(EHttpStatusCode.INTERNAL_SERVER_ERROR)
-      .json({ message: 'Internal Server Error' });
+      .json({ message: EErrorMessages.INTERNAL_SERVER_ERROR });
   }
 };
 
@@ -72,12 +73,12 @@ export const deleteAddress = async (req: Request, res: Response) => {
     } else {
       return res
         .status(EHttpStatusCode.NOT_FOUND)
-        .json({ message: 'Address not found' });
+        .json({ message: EErrorMessages.ADDRESS_NOT_FOUND });
     }
   } catch (error) {
     return res
       .status(EHttpStatusCode.INTERNAL_SERVER_ERROR)
-      .json({ message: 'Internal Server Error' });
+      .json({ message: EErrorMessages.INTERNAL_SERVER_ERROR });
   }
 };
 
@@ -93,11 +94,11 @@ export const updateAddress = async (req: Request, res: Response) => {
     } else {
       return res
         .status(EHttpStatusCode.NOT_FOUND)
-        .json({ message: 'Address not found' });
+        .json({ message: EErrorMessages.ADDRESS_NOT_FOUND });
     }
   } catch (error) {
     return res
       .status(EHttpStatusCode.INTERNAL_SERVER_ERROR)
-      .json({ message: 'Internal Server Error' });
+      .json({ message: EErrorMessages.INTERNAL_SERVER_ERROR });
   }
 };

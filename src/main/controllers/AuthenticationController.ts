@@ -1,3 +1,4 @@
+import { EErrorMessages } from '@/domain/enums/EErrorMessages';
 import { EHttpStatusCode } from '@/domain/enums/EHttpStatusCode';
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
@@ -18,7 +19,7 @@ export const create = async (req: Request, res: Response) => {
     if (userFound) {
       return res
         .status(EHttpStatusCode.BAD_REQUEST)
-        .json({ message: 'User already exists' });
+        .json({ message: EErrorMessages.USER_ALREADY_EXISTS });
     }
     const hashedPassword = await hashPasswordFactory.execute(password);
 
@@ -42,7 +43,7 @@ export const create = async (req: Request, res: Response) => {
   } catch (error) {
     return res
       .status(EHttpStatusCode.INTERNAL_SERVER_ERROR)
-      .json({ message: 'Internal Server Error' });
+      .json({ message: EErrorMessages.INTERNAL_SERVER_ERROR });
   }
 };
 
@@ -54,7 +55,7 @@ export const login = async (req: Request, res: Response) => {
     if (!user) {
       return res
         .status(EHttpStatusCode.BAD_REQUEST)
-        .json({ message: 'Invalid credentials' });
+        .json({ message: EErrorMessages.INVALID_CREDENTIALS });
     }
 
     const isMatch = await comparePasswordFactory.execute(
@@ -64,7 +65,7 @@ export const login = async (req: Request, res: Response) => {
     if (!isMatch) {
       return res
         .status(EHttpStatusCode.BAD_REQUEST)
-        .json({ message: 'Invalid credentials' });
+        .json({ message: EErrorMessages.INVALID_CREDENTIALS });
     }
 
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, {
@@ -75,6 +76,6 @@ export const login = async (req: Request, res: Response) => {
   } catch (error) {
     return res
       .status(EHttpStatusCode.INTERNAL_SERVER_ERROR)
-      .json({ message: 'Internal Server Error' });
+      .json({ message: EErrorMessages.INTERNAL_SERVER_ERROR });
   }
 };
