@@ -12,6 +12,45 @@ Este projeto é uma API para gerenciar usuários e endereços. Ele segue os prin
 - Cobertura de testes com Jest, incluindo mocks e fakes.
 - Implementação de padrões de projeto como **Factory** e **Mapper**.
 
+## 🚀 Como Rodar a API
+### Pré-requisitos
+Antes de começar, você precisará ter as seguintes ferramentas instaladas:
+- Node.js (versão 14 ou superior)
+= Yarn ou npm
+- MongoDB (para rodar o banco de dados localmente)
+### Passo a passo
+```bash
+# Clone este repositório
+$ git clone https://github.com/clauds-macedo/userhub.git
+
+# Acesse a pasta do projeto
+$ cd userhub
+
+# Instale as dependências
+$ yarn
+# ou
+$ npm install
+
+# Copie o arquivo de exemplo de variáveis de ambiente
+$ cp .env.example .env
+
+# Inicie o MongoDB (ou abra o Mongo Compass e inicie conexão)
+$ mongod
+
+# Execute a aplicação
+$ yarn dev
+# ou
+$ npm run dev
+
+# A aplicação será iniciada na porta definida no .env (padrão: 3333)
+# Acesse http://localhost:3333
+
+# Para rodar os testes (opcional)
+$ yarn test
+# ou
+$ npm run test
+```
+
 ## Padrões de Projeto Utilizados
 
 ### Factory
