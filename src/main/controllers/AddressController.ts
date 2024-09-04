@@ -24,8 +24,9 @@ export const createAddress = async (req: Request, res: Response) => {
 };
 
 export const getAllAddresses = async (req: Request, res: Response) => {
+  const filters = req.query;
   try {
-    const addresses = await getAllAddressesFactory.execute();
+    const addresses = await getAllAddressesFactory.execute(filters);
 
     return res.status(200).json(addresses);
   } catch (error) {
@@ -35,10 +36,11 @@ export const getAllAddresses = async (req: Request, res: Response) => {
 
 export const getAddressById = async (req: Request, res: Response) => {
   const { id } = req.params;
+  const filters = req.query;
 
   try {
-    const address = await findAddressesByUserIdFactory.execute(id);
-    if (!address) {
+    const address = await findAddressesByUserIdFactory.execute(id, filters);
+    if (!address || address.length === 0) {
       return res.status(404).json({ message: 'Address not found' });
     }
 
