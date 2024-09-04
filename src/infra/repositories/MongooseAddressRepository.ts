@@ -36,8 +36,8 @@ export class MongooseAddressRepository implements IAddressRepository {
     return addressDocuments.map((doc) => this.toDomainModel(doc));
   }
 
-  async findAll(): Promise<IAddress[]> {
-    const addressDocuments = await MongooseAddress.find().exec();
+  async findAll(filters: Partial<IAddress> = {}): Promise<IAddress[]> {
+    const addressDocuments = await MongooseAddress.find(filters).exec();
     return addressDocuments.map((doc) => this.toDomainModel(doc));
   }
 

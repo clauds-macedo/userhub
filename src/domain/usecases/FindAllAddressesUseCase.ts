@@ -4,7 +4,7 @@ import { IAddressRepository } from '../repositories/IAddressRepository';
 export class FindAllAddressesUseCase {
   constructor(private addressRepository: IAddressRepository) {}
 
-  async execute(): Promise<IAddress[]> {
-    return this.addressRepository.findAll();
+  async execute(filters: Partial<IAddress> = {}): Promise<IAddress[]> {
+    return this.addressRepository.findAll(filters);
   }
 }
