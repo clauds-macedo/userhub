@@ -16,7 +16,7 @@ Este projeto é uma API para gerenciar usuários e endereços. Ele segue os prin
 ### Pré-requisitos
 Antes de começar, você precisará ter as seguintes ferramentas instaladas:
 - Node.js (versão 14 ou superior)
-= Yarn ou npm
+- Yarn ou npm
 - MongoDB (para rodar o banco de dados localmente)
 ### Passo a passo
 ```bash
