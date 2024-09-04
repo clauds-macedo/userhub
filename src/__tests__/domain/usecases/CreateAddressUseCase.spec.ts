@@ -19,8 +19,8 @@ describe('CreateAddressUseCase', () => {
   it('should create an address with valid data', async () => {
     const addressData = {
       userId: '123',
-      street: 'Main St',
-      city: 'Sample City',
+      street: 'Street 9999',
+      city: 'Campinas',
     };
     await createAddressUseCase.execute(addressData);
 
