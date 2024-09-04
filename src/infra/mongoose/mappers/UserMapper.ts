@@ -1,10 +1,9 @@
-import { ICreateUserDTO } from '@/domain/dtos/IUserDTO';
 import { IAddress } from '@/domain/entities/Address';
-import { User as DomainUser, IUser } from '@/domain/entities/User';
+import { User as DomainUser, IUser, User } from '@/domain/entities/User';
 import { InferSchemaType } from 'mongoose';
 import { MongooseUser } from '../models/MongooseUser';
 
-type TMongooseUserDocument = InferSchemaType<typeof MongooseUser.schema>;
+export type TMongooseUserDocument = InferSchemaType<typeof MongooseUser.schema>;
 
 export class UserMapper {
   static toDomain(
@@ -14,7 +13,7 @@ export class UserMapper {
       street: address.street || '',
       city: address.city || '',
       userId: userDocument.id,
-      id: address.id,
+      id: address._id.toString(),
     }));
 
     const user: IUser = {
@@ -25,13 +24,13 @@ export class UserMapper {
     return new DomainUser(user);
   }
 
-  static toPersistence(domainUser: ICreateUserDTO): TMongooseUserDocument {
+  static toPersistence(domainUser: Partial<User>) {
     return {
       name: domainUser.name,
       email: domainUser.email,
       password: domainUser.password,
       createdAt: new Date(),
       addresses: [],
-    } as unknown as TMongooseUserDocument;
+    };
   }
 }

@@ -1,18 +1,30 @@
 import { ICreateUserDTO } from '@/domain/dtos/IUserDTO';
 import { IUser, User } from '@/domain/entities/User';
 import { IUserRepository } from '@/domain/repositories/IUserRepository';
-import { UserMapper } from '../mongoose/mappers/UserMapper';
+import { Document } from 'mongoose';
+import {
+  TMongooseUserDocument,
+  UserMapper,
+} from '../mongoose/mappers/UserMapper';
 import { MongooseUser } from '../mongoose/models/MongooseUser';
 
 export class MongooseUserRepository implements IUserRepository {
-  async create(user: ICreateUserDTO): Promise<User> {
-    const userDocument = new MongooseUser(UserMapper.toPersistence(user));
-    await userDocument.save();
+  private toDomainModel(userDocument: TMongooseUserDocument & Document): User {
     const { _id, ...rest } = userDocument.toObject();
     return UserMapper.toDomain({
       id: _id.toString(),
       ...rest,
     });
+  }
+
+  private toPersistenceModel(user: Partial<User>) {
+    return UserMapper.toPersistence(user);
+  }
+
+  async create(user: ICreateUserDTO): Promise<User> {
+    const userDocument = new MongooseUser(this.toPersistenceModel(user));
+    await userDocument.save();
+    return this.toDomainModel(userDocument);
   }
 
   async remove(id: string): Promise<boolean> {
@@ -21,17 +33,17 @@ export class MongooseUserRepository implements IUserRepository {
   }
 
   async update(id: string, user: Partial<IUser>): Promise<User | null> {
-    const userDocument = await MongooseUser.findByIdAndUpdate(id, user, {
-      new: true,
-    }).exec();
+    const userDocument = await MongooseUser.findByIdAndUpdate(
+      id,
+      this.toPersistenceModel(user),
+      {
+        new: true,
+      }
+    ).exec();
     if (!userDocument) {
       return null;
     }
-    const { _id, ...rest } = userDocument.toObject();
-    return UserMapper.toDomain({
-      id: _id.toString(),
-      ...rest,
-    });
+    return this.toDomainModel(userDocument);
   }
 
   async findById(id: string): Promise<User | null> {
@@ -41,24 +53,16 @@ export class MongooseUserRepository implements IUserRepository {
     if (!userDocument) {
       return null;
     }
-    const { _id, ...rest } = userDocument.toObject();
-    return UserMapper.toDomain({
-      id: _id.toString(),
-      ...rest,
-    });
+    return this.toDomainModel(userDocument);
   }
 
   async findAll(): Promise<User[]> {
     const userDocuments = await MongooseUser.find()
       .populate('addresses')
       .exec();
-    return userDocuments.map((userDocument) => {
-      const { _id, ...rest } = userDocument.toObject();
-      return UserMapper.toDomain({
-        id: _id.toString(),
-        ...rest,
-      });
-    });
+    return userDocuments.map((userDocument) =>
+      this.toDomainModel(userDocument)
+    );
   }
 
   async findByEmail(email: string): Promise<User | null> {
@@ -66,10 +70,6 @@ export class MongooseUserRepository implements IUserRepository {
     if (!userDocument) {
       return null;
     }
-    const { _id, ...rest } = userDocument.toObject();
-    return UserMapper.toDomain({
-      id: _id.toString(),
-      ...rest,
-    });
+    return this.toDomainModel(userDocument);
   }
 }

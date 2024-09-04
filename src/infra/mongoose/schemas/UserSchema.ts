@@ -5,5 +5,10 @@ export const UserSchema = new Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
-  addresses: [{ type: Schema.Types.ObjectId, ref: 'Address' }],
+  addresses: [
+    {
+      street: String,
+      city: String,
+    },
+  ],
 });

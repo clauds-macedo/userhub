@@ -3,13 +3,13 @@ import { IAddressRepository } from '@/domain/repositories/IAddressRepository';
 import { Document } from 'mongoose';
 import {
   AddressMapper,
-  TMongooseUserDocument,
+  TMongooseAddressDocument,
 } from '../mongoose/mappers/AddressMapper';
 import { MongooseAddress } from '../mongoose/models/MongooseAddress';
 
 export class MongooseAddressRepository implements IAddressRepository {
   private toDomainModel(
-    addressDocument: TMongooseUserDocument & Document
+    addressDocument: TMongooseAddressDocument & Document
   ): IAddress {
     const { _id, ...rest } = addressDocument.toObject();
     return AddressMapper.toDomain({ id: _id.toString(), ...rest });
