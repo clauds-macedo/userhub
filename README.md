@@ -54,7 +54,7 @@ $ npm run test
 ## Padrões de Projeto Utilizados
 
 ### Factory
-No contexto dessa API, o padrão **Factory** pode ser usado, por exemplo, para a criação de instâncias de repositórios ou serviços, garantindo que a lógica de inicialização esteja desacoplada da lógica de negócio, tornando o código mais limpo e fácil de manter.
+No contexto dessa API, o padrão **Factory** foi para a criação de instâncias de repositórios ou serviços, garantindo que a lógica de inicialização esteja desacoplada da lógica de negócio, tornando o código mais limpo e fácil de manter.
 
 ### Mapper
 O **Mapper** é utilizado para transformar entidades para o Schema de um banco de dados (nesse caso, o MongoDB) e também para mapear de volta esses dados para entidades de domínio ao salvar ou atualizar informações. Isso garante que a lógica de conversão entre o modelo de dados do MongoDB e as entidades da aplicação seja centralizada, evitando duplicação de código e minimizando erros durante a manipulação de dados, fazendo com que as regras de negócio criadas na camada de domínio se mantenham, criando um desacoplamento do Mongoose.
