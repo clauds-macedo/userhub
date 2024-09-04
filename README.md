@@ -69,6 +69,8 @@ O **Mapper** é utilizado para transformar entidades para o Schema de um banco d
 │   │   └── app.ts                 # Configuração principal da aplicação (express, middlewares, etc.)
 │   └── __tests__/                 # Testes unitários e mocks
 ├── .env                           # Variáveis de ambiente
-├── package.json                   # Dependências e scripts do projeto
-└── yarn.lock                      # Arquivo de bloqueio de dependências
 ```
+
+## Diagrama
+![userhub (1)](https://github.com/user-attachments/assets/37a56601-0a24-4f30-8488-39174252a30d)
+
