@@ -23,12 +23,12 @@ O **Mapper** é utilizado para transformar entidades para o Schema de um banco d
 
 ## Tecnologias Utilizadas
 
-- **TypeScript**: JavaScript com tipagem estática para código mais confiável e manutenível.
-- **Jest**: Framework de testes para testes unitários e de integração.
-- **ESLint**: Ferramenta de linting para garantir a qualidade do código.
-- **Arquitetura Limpa**: Separação de responsabilidades entre lógica de negócio, entidades e acesso a dados.
-- **Factory Pattern**: Padrão de fábrica para abstrair a criação de objetos.
-- **Mapper Pattern**: Padrão para transformar objetos de um tipo para outro.
+- ⚙️ TypeScript
+- 🧪 Jest
+- 🧹 ESLint
+- 🏛️ Arquitetura Limpa
+- 🏭 Factory Pattern
+- 🔄 Mapper Pattern
 
 ## Estrutura do Projeto
 
