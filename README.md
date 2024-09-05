@@ -111,5 +111,5 @@ O **Mapper** é utilizado para transformar entidades para o Schema de um banco d
 ```
 
 ## Diagrama
-![userhub (1)](https://github.com/user-attachments/assets/37a56601-0a24-4f30-8488-39174252a30d)
+![userhub (2)](https://github.com/user-attachments/assets/6471fd98-8ee8-4db5-b4eb-689ed45f4afe)
 
